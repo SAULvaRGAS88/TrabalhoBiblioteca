@@ -7,15 +7,15 @@ function validacaoLivro(livro) {
 }
 
 function validarAutor(autor) {
-    return autor && autor.nome && autor.paisOrigem &&
+    return autor && autor.nome && autor.pais_origem &&
         typeof autor.nome == 'string' &&
-        typeof autor.paisOrigem == 'string'
+        typeof autor.pais_origem == 'string'
 }
 function validarCliente(cliente) {
     return cliente && cliente.matricula && cliente.nome && cliente.telefone &&
         typeof cliente.matricula == 'number' &&
         typeof cliente.nome == 'string' &&
-        typeof cliente.telefone == 'number'
+        typeof cliente.telefone == 'string'
 }
 
 module.exports = {
