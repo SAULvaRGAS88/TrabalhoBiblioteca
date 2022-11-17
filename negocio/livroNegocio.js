@@ -10,6 +10,13 @@ async function inserireLivro(livro) {
         throw { id: 400, mensagem: "Falta parametros" };
     }
 }
+async function consultaLivro(nome) {
+    const livro = await livroPersistence.buscarLivroNome(nome)
+    if (livro === livro) {
+        throw { id: 400, mensagem: ">>>LIVRO JÁ CADASTRADO<<<" }
+    }
+    return livroPersistence.buscarLivroNome;
+}
 
 async function listarLivros() {
     return await livroPersistence.listarLivros();
@@ -53,5 +60,6 @@ module.exports = {
     buscarLivroId,
     buscarLivroNome,
     atualizarLivro,
-    deletarLivro
+    deletarLivro,
+    consultaLivro
 }

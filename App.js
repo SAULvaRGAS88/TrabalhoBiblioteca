@@ -1,37 +1,38 @@
 const livroNegocio = require('./negocio/livroNegocio')
 
 async function main() {
-
     //ADICIONANDO LIVROS
     try {
         const insereLivro01 = await livroNegocio.inserireLivro({
-            nome: 'O pequeno príncipe', autor: 'Antoine de Saint-Exupéry',
+            nome: 'O pequeno príncipe',
+            autor: 'Antoine de Saint-Exupéry',
             editora: 'Editora do  Brasil',
             ano: 1943
         })
-        console.log('Livro 01 inserido', insereLivro01);
+        if (await livroNegocio.consultaLivro('O pequeno príncipe')) { console.log('Livro 01 inserido', insereLivro01); }
     } catch (err) {
         console.log(err);
     }
 
     try {
         const insereLivro02 = await livroNegocio.inserireLivro({
-            nome: 'O Menino Maluquinho', autor: 'Ziraldo Alves Pinto',
+            nome: 'O Menino Maluquinho',
+            autor: 'Ziraldo Alves Pinto',
             editora: 'Melhoramentos',
             ano: 1980
         })
-        console.log('Livro 02 inserido', insereLivro02);
+        if (await livroNegocio.consultaLivro('O Menino Maluquinho')) { console.log('Livro 01 inserido', insereLivro02); }
     } catch (err) {
         console.log(err);
     }
 
-    //LISTANDO TODOS LIVROS
+    // LISTANDO TODOS LIVROS
     const list = await livroNegocio.listarLivros()
     console.log('Lista de livro(s)', list);
 
     // BUSCANDO LIVRO POR ID
     try {
-        const livro = await livroNegocio.buscarLivroId(2)
+        const livro = await livroNegocio.buscarLivroId(150)
         console.log('LIVRO 2 PESQUISADO POR ID', livro);
     } catch (err) {
         console.log('ERRO', err);
@@ -46,8 +47,9 @@ async function main() {
 
     // CASO DE SUCESSO EM ATULIAZAR LIVRO
     try {
-        const livroAtualizado = await livroNegocio.atualizarLivro(7, {
-            nome: 'O Menino Maluquinho', autor: 'Ziraldo Alves Pinto',
+        const livroAtualizado = await livroNegocio.atualizarLivro(151, {
+            nome: 'O Menino Maluquinho',
+            autor: 'Ziraldo Alves Pinto',
             editora: 'Melhoramentos',
             ano: 2022
         });
@@ -59,8 +61,9 @@ async function main() {
 
     //CASO DE INSUCESSO: PARAMETRO ANO E STRING 
     try {
-        const livroAtualizado = await livroNegocio.atualizarLivro(9, {
-            nome: 'O Menino Maluquinho', autor: 'Ziraldo Alves Pinto',
+        const livroAtualizado = await livroNegocio.atualizarLivro(141, {
+            nome: 'O Menino Maluquinho',
+            autor: 'Ziraldo Alves Pinto',
             editora: 'Melhoramentos',
             ano: '2022'
         });
@@ -91,16 +94,14 @@ async function main() {
     } catch (err) {
         console.log("Erro", err);
     }
-     //CASO DE INSUCESSO: ID INEXISTENTE
-     try{
+    //CASO DE INSUCESSO: ID INEXISTENTE
+    try {
         //TRAZER ID INVALIDO
         const livroDeletado = await livroNegocio.deletarLivro(200);
         console.log("Livro deletado", livroDeletado);
-    } catch(err){
+    } catch (err) {
         console.log("Erro", err);
     }
 }
 
 main()
-
-//>>> testendo branch

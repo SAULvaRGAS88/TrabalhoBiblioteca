@@ -21,7 +21,13 @@ async function insereLivro(livro) {
     await cliente.end()
     return res.rows[0]
 }
-
+// async function consultaLivro(nome) {
+//     const cliente = new Client(conexao)
+//     await cliente.connect()
+//     const res = await cliente.query('SELECT * FROM livro WHERE nome=$1', [nome])
+//     await cliente.end()
+//     return res.rows[0]
+// }
 
 async function buscarLivroId(id) {
     const cliente = new Client(conexao)
@@ -56,7 +62,7 @@ async function atualizarLivro(id, livro) {
 async function deletarLivro(id) {
     const cliente = new Client(conexao)
     await cliente.connect();
-    const res = await cliente.query('DELETE FROM livro WHERE id=$1 RETURNING *',[id]);
+    const res = await cliente.query('DELETE FROM livro WHERE id=$1 RETURNING *', [id]);
     await cliente.end();
     return res.rows[0];
 }
@@ -67,5 +73,6 @@ module.exports = {
     buscarLivroId,
     buscarLivroNome,
     atualizarLivro,
-    deletarLivro
+    deletarLivro,
+    // consultaLivro
 }
