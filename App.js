@@ -14,17 +14,17 @@ async function main() {
     //     console.log(err);
     // }
 
-    try {
-        const insereLivro02 = await livroNegocio.insereLivro({
-            nome: 'O Menino Maluquinho',
-            autor: 'Ziraldo Alves Pinto',
-            editora: 'Melhoramentos',
-            ano: 1980
-        })
-        console.log('Livro 02 inserido', insereLivro02);
-    } catch (err) {
-        console.log(err);
-    }
+    // try {
+    //     const insereLivro02 = await livroNegocio.insereLivro({
+    //         nome: 'O Menino Maluquinho',
+    //         autor: 'Ziraldo Alves Pinto',
+    //         editora: 'Melhoramentos',
+    //         ano: 1980
+    //     })
+    //     console.log('Livro 02 inserido', insereLivro02);
+    // } catch (err) {
+    //     console.log(err);
+    // }
 
     // LISTANDO TODOS LIVROS
     const list = await livroNegocio.listarLivros()
@@ -32,7 +32,7 @@ async function main() {
 
     // BUSCANDO LIVRO POR ID
     try {
-        const livro = await livroNegocio.buscarLivroId(150)
+        const livro = await livroNegocio.buscarLivroId(205)
         console.log('LIVRO 2 PESQUISADO POR ID', livro);
     } catch (err) {
         console.log('ERRO', err);
@@ -47,7 +47,7 @@ async function main() {
 
     // // CASO DE SUCESSO EM ATULIAZAR LIVRO
     try {
-        const livroAtualizado = await livroNegocio.atualizarLivro(151, {
+        const livroAtualizado = await livroNegocio.atualizarLivro(205, {
             nome: 'O Menino Maluquinho',
             autor: 'Ziraldo Alves Pinto',
             editora: 'Melhoramentos',
