@@ -2,26 +2,26 @@ const livroNegocio = require('./negocio/livroNegocio')
 
 async function main() {
     //ADICIONANDO LIVROS
-    try {
-        const insereLivro01 = await livroNegocio.inserireLivro({
-            nome: 'O pequeno príncipe',
-            autor: 'Antoine de Saint-Exupéry',
-            editora: 'Editora do  Brasil',
-            ano: 1943
-        })
-        if (await livroNegocio.consultaLivro('O pequeno príncipe')) { console.log('Livro 01 inserido', insereLivro01); }
-    } catch (err) {
-        console.log(err);
-    }
+    // try {
+    //     const insereLivro01 = await livroNegocio.insereLivro({
+    //         nome: 'O pequeno príncipe',
+    //         autor: 'Antoine de Saint-Exupéry',
+    //         editora: 'Editora do  Brasil',
+    //         ano: 1943
+    //     })
+    //     console.log('Livro 01 inserido', insereLivro01);
+    // } catch (err) {
+    //     console.log(err);
+    // }
 
     try {
-        const insereLivro02 = await livroNegocio.inserireLivro({
+        const insereLivro02 = await livroNegocio.insereLivro({
             nome: 'O Menino Maluquinho',
             autor: 'Ziraldo Alves Pinto',
             editora: 'Melhoramentos',
             ano: 1980
         })
-        if (await livroNegocio.consultaLivro('O Menino Maluquinho')) { console.log('Livro 01 inserido', insereLivro02); }
+        console.log('Livro 02 inserido', insereLivro02);
     } catch (err) {
         console.log(err);
     }
@@ -45,7 +45,7 @@ async function main() {
         console.log("Erro", err);
     }
 
-    // CASO DE SUCESSO EM ATULIAZAR LIVRO
+    // // CASO DE SUCESSO EM ATULIAZAR LIVRO
     try {
         const livroAtualizado = await livroNegocio.atualizarLivro(151, {
             nome: 'O Menino Maluquinho',
@@ -59,7 +59,7 @@ async function main() {
         console.log("Erro", err);
     }
 
-    //CASO DE INSUCESSO: PARAMETRO ANO E STRING 
+    // //CASO DE INSUCESSO: PARAMETRO ANO E STRING 
     try {
         const livroAtualizado = await livroNegocio.atualizarLivro(141, {
             nome: 'O Menino Maluquinho',
@@ -73,7 +73,7 @@ async function main() {
         console.log("Erro", err);
     }
 
-    //CASO DE INSUCESSO: ID INEXISTENTE
+    // //CASO DE INSUCESSO: ID INEXISTENTE
     try {
         const livroAtualizado = await livroNegocio.atualizarLivro(777, {
             nome: 'O Menino Maluquinho', autor: 'Ziraldo Alves Pinto',
@@ -86,7 +86,7 @@ async function main() {
         console.log("Erro", err);
     }
 
-    //CASO DE SUCESSO - DELETAR LIVRO
+    // //CASO DE SUCESSO - DELETAR LIVRO
     try {
         //ID VALIDO
         const livroDeletado = await livroNegocio.deletarLivro(666);
@@ -94,7 +94,7 @@ async function main() {
     } catch (err) {
         console.log("Erro", err);
     }
-    //CASO DE INSUCESSO: ID INEXISTENTE
+    // //CASO DE INSUCESSO: ID INEXISTENTE
     try {
         //TRAZER ID INVALIDO
         const livroDeletado = await livroNegocio.deletarLivro(200);

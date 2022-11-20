@@ -1,10 +1,19 @@
 const { validacaoLivro } = require('./validacao')
 const livroPersistence = require('../persistence/livroPersistence')
 
-async function inserireLivro(livro) {
+async function insereLivro(livro) {
     if (validacaoLivro(livro)) {
-        const livroInserido = await livroPersistence.insereLivro(livro);
-        return livroInserido;
+        const livroNome = await livroPersistence.buscarLivroNome(livro.nome)
+        if (livroNome['nome'] == ''){
+            throw { id: 400, mensagem: ">>>SEM LIVROS CADASTRADOS<<<" }
+        }
+        if (livroNome['nome'] == livro.nome) {
+            throw { id: 400, mensagem: ">>>LIVRO JÁ CADASTRADO<<<" }
+        }
+        else {
+            const livroInserido = await livroPersistence.insereLivro(livro);
+            return livroInserido;
+        }
     }
     else {
         throw { id: 400, mensagem: "Falta parametros" };
@@ -12,9 +21,6 @@ async function inserireLivro(livro) {
 }
 async function consultaLivro(nome) {
     const livro = await livroPersistence.buscarLivroNome(nome)
-    if (livro === livro) {
-        throw { id: 400, mensagem: ">>>LIVRO JÁ CADASTRADO<<<" }
-    }
     return livroPersistence.buscarLivroNome;
 }
 
@@ -55,7 +61,7 @@ async function deletarLivro(id) {
 }
 
 module.exports = {
-    inserireLivro,
+    insereLivro,
     listarLivros,
     buscarLivroId,
     buscarLivroNome,
