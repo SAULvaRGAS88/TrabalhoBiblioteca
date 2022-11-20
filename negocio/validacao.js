@@ -12,8 +12,7 @@ function validarAutor(autor) {
         typeof autor.pais_origem == 'string'
 }
 function validarCliente(cliente) {
-    return cliente && cliente.matricula && cliente.nome && cliente.telefone &&
-        typeof cliente.matricula == 'number' &&
+    return cliente && cliente.nome && cliente.telefone &&
         typeof cliente.nome == 'string' &&
         typeof cliente.telefone == 'string'
 }
