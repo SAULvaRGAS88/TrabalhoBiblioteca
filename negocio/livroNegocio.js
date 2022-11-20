@@ -3,22 +3,14 @@ const livroPersistence = require('../persistence/livroPersistence')
 
 async function insereLivro(livro) {
     if (validacaoLivro(livro)) {
-        const livroNome = await livroPersistence.buscarLivroNome(livro.nome)
-        if (livroNome['nome'] == ''){
-            throw { id: 400, mensagem: ">>>SEM LIVROS CADASTRADOS<<<" }
-        }
-        if (livroNome['nome'] == livro.nome) {
-            throw { id: 400, mensagem: ">>>LIVRO JÁ CADASTRADO<<<" }
-        }
-        else {
-            const livroInserido = await livroPersistence.insereLivro(livro);
-            return livroInserido;
-        }
+        const livroInserido = await livroPersistence.insereLivro(livro);
+        return livroInserido;
     }
     else {
-        throw { id: 400, mensagem: "Falta parametros" };
+        throw { id: 400, mensagem: "FALTA PARAMETROS" }
     }
 }
+
 async function consultaLivro(nome) {
     const livro = await livroPersistence.buscarLivroNome(nome)
     return livroPersistence.buscarLivroNome;
