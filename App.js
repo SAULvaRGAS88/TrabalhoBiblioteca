@@ -102,6 +102,14 @@ async function main() {
     } catch (err) {
         console.log("Erro", err);
     }
+
+    // //TRAZER LIVROS DISPONIVEIS
+    // try {
+    //     const livroDisponivel = await livroNegocio.consultaLivroDisponivel('O Menino Maluquinho');
+    //     console.log(">>>LIVROS DISPONIVEIS", livroDisponivel);
+    // } catch (err){
+    //     console.log("ERRO", err );
+    // }
 }
 
 main()

@@ -52,6 +52,18 @@ async function deletarLivro(id) {
         return await livroPersistence.deletarLivro(id);
 }
 
+// async function consultaLivroDisponivel(nome) {
+//     const statusLivro = await livroPersistence.buscarLivroNome(nome);
+//     if (statusLivro){
+//         return await livroPersistence.consultaLivroDisponivel(nome)
+//     }
+//     else{
+//         throw { id: 400, mensagem: "ALGUM PARAMETRO INVALIDO ...ARRUMA ISSO DEV..." };
+//     }
+        
+// }
+
+
 module.exports = {
     insereLivro,
     listarLivros,
@@ -59,5 +71,6 @@ module.exports = {
     buscarLivroNome,
     atualizarLivro,
     deletarLivro,
-    consultaLivro
+    consultaLivro,
+    // consultaLivroDisponivel
 }
