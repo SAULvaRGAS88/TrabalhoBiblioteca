@@ -12,11 +12,13 @@ async function listarLivros() {
 async function insereLivro(livro) {
     const cliente = new Client(conexao)
     await cliente.connect()
-    const res = await cliente.query('INSERT INTO livro (nome, autor, editora, ano) VALUES ($1,$2,$3,$4) RETURNING *', [
+    const res = await cliente.query('INSERT INTO livro (nome, autor, editora, ano, status) VALUES ($1,$2,$3,$4,$5) RETURNING *', [
         livro.nome,
         livro.autor,
         livro.editora,
-        livro.ano
+        livro.ano,
+        'disponivel'
+
     ])
     await cliente.end()
     return res.rows[0]
@@ -60,6 +62,41 @@ async function deletarLivro(id) {
     return res.rows[0];
 }
 
+async function devolucaoLivro(id) {
+    const cliente = new Client(conexao)
+    await cliente.connect();
+    const res = await cliente.query('UPDATE livro SET status=$1 WHERE id=$2 RETURNING *', [
+        'disponivel',
+        id
+    ])
+    await cliente.end();
+    return res.rows[0];
+}
+async function retiradaLivro(id) {
+    const cliente = new Client(conexao)
+    await cliente.connect();
+    const res = await cliente.query('UPDATE livro SET status=$1 WHERE id=$2 RETURNING *', [
+        'indisponivel',
+        id
+    ])
+    await cliente.end();
+    return res.rows[0];
+}
+
+// async function consultaLivroDisponivel(nome, status) {
+//     const cliente = new Client(conexao)
+//     await cliente.connect();
+//     const res = await cliente.query('SELECT FROM livro nome=$1 WHERE status=$2 RETURNING *', [
+//         nome,
+//         status
+//     ])
+//     await cliente.end();
+//     return res.rows[0];
+// }
+
+
+
+
 module.exports = {
     listarLivros,
     insereLivro,
@@ -67,4 +104,7 @@ module.exports = {
     buscarLivroNome,
     atualizarLivro,
     deletarLivro,
+    devolucaoLivro,
+    retiradaLivro,
+    // consultaLivroDisponivel
 }

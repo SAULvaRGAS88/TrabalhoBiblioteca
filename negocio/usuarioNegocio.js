@@ -33,7 +33,7 @@ async function buscarUsuarioNome(nome) {
 
 async function atualizarUsuario(matricula, usuario) {
     if (validarCliente(usuario)) {
-        const usuarioAtualizar = await buscarUsuarioMatricula(matricula);
+        const usuarioAtualizar = await usuarioPersistence.buscarUsuarioMatricula(matricula);
         if (usuarioAtualizar)
             return await usuarioPersistence.atualizarUsuario(matricula, usuario);
     }
@@ -43,9 +43,26 @@ async function atualizarUsuario(matricula, usuario) {
 }
 
 async function deletarUsuario(matricula) {
-    const usuarioDeletar = await buscarUsuarioMatricula(matricula);
+    const usuarioDeletar = await usuarioPersistence.buscarUsuarioMatricula(matricula);
     if (usuarioDeletar)
         return await usuarioPersistence.deletarUsuario(matricula);
+}
+
+async function retiradaLivro(matricula) {
+    const localizaUsuario = await usuarioPersistence.buscarUsuarioMatricula(matricula)
+    if (localizaUsuario){
+        if (localizaUsuario['qtd_livros']<3){
+            const total = localizaUsuario['qtd_livros']+=1 
+            const atualizaQtd = await usuarioPersistence.retiradaLivro(total, matricula)
+            return atualizaQtd
+        }
+        else{
+            throw {id: 400 , mensagem: 'Voçê adingiu a quantidade maxima de locação'}
+        }
+    }
+    else{
+        throw {id: 404, mensagem: 'Usuario não encontrado' }
+    }
 }
 
 module.exports = {
@@ -54,5 +71,6 @@ module.exports = {
     buscarUsuarioMatricula,
     buscarUsuarioNome,
     atualizarUsuario,
-    deletarUsuario
+    deletarUsuario,
+    retiradaLivro
 }

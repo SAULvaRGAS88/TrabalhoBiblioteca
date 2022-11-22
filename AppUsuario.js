@@ -1,4 +1,5 @@
 const usuarioNegocio = require('./negocio/usuarioNegocio')
+const usuarioPersistence = require('./persistence/usuarioPersistence')
 
 async function main() {
     //ADICIONANDO CLIENTE
@@ -23,78 +24,90 @@ async function main() {
     //     console.log(err);
     // }
 
-    // LISTANDO TODOS USUARIOs
-    const list = await usuarioNegocio.listarUsuarios()
-    console.log('>>>LISTE DE USUARIO CADASTRADO(s)', list);
+    // // LISTANDO TODOS USUARIOs
+    // const list = await usuarioNegocio.listarUsuarios()
+    // console.log('>>>LISTE DE USUARIO CADASTRADO(s)', list);
 
-    // BUSCANDO USUARIO POR MATRICULA
+    // // BUSCANDO USUARIO POR MATRICULA
+    // try {
+    //     const usuario = await usuarioNegocio.buscarUsuarioMatricula(1)
+    //     console.log('>>> USUARIO 1 PESQUISADO POR ID', usuario);
+    // } catch (err) {
+    //     console.log('ERRO', err);
+    // }
+
+    // // BUSCANDO USUARIO POR NOME
+    // try {
+    //     const usuario = await usuarioNegocio.buscarUsuarioNome('Saul Vargas Costa');
+    //     console.log(">>> USUARIO 1 PESQUISADO POR NOME", usuario);
+    // } catch (err) {
+    //     console.log("Erro", err);
+    // }
+
+    // // CASO DE SUCESSO EM ATULIAZAR USUARIO
+    // try {
+    //     const usuarioAtualizado = await usuarioNegocio.atualizarUsuario(1, {
+    //         nome: 'Saul Vargas Costa',
+    //         telefone: '(51) 999999999',
+    //     });
+    //     console.log('>>>USUARIO ATUALIZADO PARA', usuarioAtualizado);
+    // }
+    // catch (err) {
+    //     console.log("Erro", err);
+    // }
+
+    //   // //CASO DE INSUCESSO: PARAMETRO NUMBER EM STRING 
+    //   try {
+    //     const usuarioAtualizado = await usuarioNegocio.atualizarUsuario(1, {
+    //         nome: 'Saul Vargas Costa',
+    //         telefone: 51999999999,
+    //     });
+    //     console.log('USUARIO ATUALIZADO PARA', usuarioAtualizado);
+    // }
+    // catch (err) {
+    //     console.log("Erro", err);
+    // }
+
+    // // //CASO DE INSUCESSO: MATRICULA INEXISTENTE
+    // try {
+    //     const usuarioAtualizado = await usuarioNegocio.atualizarUsuario(777, {
+    //         nome: 'Saul Vargas Costa',
+    //         telefone: '(51) 999999999'
+    //     });
+    //     console.log('USUARIO ATUALIZADO PARA', usuarioAtualizado);
+    // }
+    // catch (err) {
+    //     console.log("Erro", err);
+    // }
+
+    //  // //CASO DE SUCESSO - DELETAR USUARIO
+    //  try {
+    //     //MATRICULA VALIDO
+    //     const usuarioDeletado = await usuarioNegocio.deletarUsuario(1);
+    //     console.log(">>> USUARIO DELETADO COM SUCESSO ", usuarioDeletado);
+    // } catch (err) {
+    //     console.log("Erro", err);
+    // }
+    // // //CASO DE INSUCESSO: ID INEXISTENTE
+    // try {
+    //     //TRAZER MATRICULA INVALIDA
+    //     const usuarioDeletado = await usuarioNegocio.deletarUsuario(200);
+    //     console.log("USUARIO DELETADO", usuarioDeletado);
+    // } catch (err) {
+    //     console.log("Erro", err);
+    // }
+
+    //RETIRANDO LIVRO 
     try {
-        const usuario = await usuarioNegocio.buscarUsuarioMatricula(1)
-        console.log('>>> USUARIO 1 PESQUISADO POR ID', usuario);
+        const retiradaLivro = await usuarioNegocio.retiradaLivro(2)
+        console.log(retiradaLivro);
     } catch (err) {
-        console.log('ERRO', err);
+        console.log("ERRO", err);
     }
 
-    // BUSCANDO USUARIO POR NOME
-    try {
-        const usuario = await usuarioNegocio.buscarUsuarioNome('Saul Vargas Costa');
-        console.log(">>> USUARIO 1 PESQUISADO POR NOME", usuario);
-    } catch (err) {
-        console.log("Erro", err);
-    }
 
-    // CASO DE SUCESSO EM ATULIAZAR USUARIO
-    try {
-        const usuarioAtualizado = await usuarioNegocio.atualizarUsuario(1, {
-            nome: 'Saul Vargas Costa',
-            telefone: '(51) 999999999',
-        });
-        console.log('>>>USUARIO ATUALIZADO PARA', usuarioAtualizado);
-    }
-    catch (err) {
-        console.log("Erro", err);
-    }
-
-      // //CASO DE INSUCESSO: PARAMETRO NUMBER EM STRING 
-      try {
-        const usuarioAtualizado = await usuarioNegocio.atualizarUsuario(1, {
-            nome: 'Saul Vargas Costa',
-            telefone: 51999999999,
-        });
-        console.log('USUARIO ATUALIZADO PARA', usuarioAtualizado);
-    }
-    catch (err) {
-        console.log("Erro", err);
-    }
-
-    // //CASO DE INSUCESSO: MATRICULA INEXISTENTE
-    try {
-        const usuarioAtualizado = await usuarioNegocio.atualizarUsuario(777, {
-            nome: 'Saul Vargas Costa',
-            telefone: '(51) 999999999'
-        });
-        console.log('USUARIO ATUALIZADO PARA', usuarioAtualizado);
-    }
-    catch (err) {
-        console.log("Erro", err);
-    }
-
-     // //CASO DE SUCESSO - DELETAR USUARIO
-     try {
-        //MATRICULA VALIDO
-        const usuarioDeletado = await usuarioNegocio.deletarUsuario(1);
-        console.log(">>> USUARIO DELETADO COM SUCESSO ", usuarioDeletado);
-    } catch (err) {
-        console.log("Erro", err);
-    }
-    // //CASO DE INSUCESSO: ID INEXISTENTE
-    try {
-        //TRAZER MATRICULA INVALIDA
-        const usuarioDeletado = await usuarioNegocio.deletarUsuario(200);
-        console.log("USUARIO DELETADO", usuarioDeletado);
-    } catch (err) {
-        console.log("Erro", err);
-    }
+    // const test02 = await usuarioPersistence.devolucaoLivro(2)
+    // console.log(test02);
 }
 
 main()

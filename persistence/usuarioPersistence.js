@@ -4,10 +4,10 @@ const { conexao } = require('./conexao')
 async function insereUsuario(usuario) {
     const cliente = new Client(conexao)
     await cliente.connect()
-    const res = await cliente.query('INSERT INTO usuario (nome, telefone) VALUES ($1,$2) RETURNING *', [
+    const res = await cliente.query('INSERT INTO usuario (nome, telefone, qtd_livros) VALUES ($1,$2,$3) RETURNING *', [
         usuario.nome,
         usuario.telefone,
-        
+        0
     ])
     await cliente.end()
     return res.rows[0]
@@ -57,6 +57,26 @@ async function deletarUsuario(matricula) {
     await cliente.end();
     return res.rows[0];
 }
+// async function devolucaoLivro(matricula) {
+//     const cliente = new Client(conexao)
+//     await cliente.connect();
+//     const res = await cliente.query('UPDATE usuario SET qtd_livros=$1 WHERE matricula=$2 RETURNING *', [
+//         -1,
+//         matricula
+//     ])
+//     await cliente.end();
+//     return res.rows[0]; 
+// }
+async function retiradaLivro(valor, matricula) {
+    const cliente = new Client(conexao)
+    await cliente.connect();
+    const res = await cliente.query('UPDATE usuario SET qtd_livros=$1 WHERE matricula=$2 RETURNING *', [
+        valor,
+        matricula
+    ])
+    await cliente.end();
+    return res.rows[0]; 
+}
 
 module.exports ={
     insereUsuario,
@@ -64,5 +84,6 @@ module.exports ={
     buscarUsuarioMatricula,
     buscarUsuarioNome,
     atualizarUsuario,
-    deletarUsuario
+    deletarUsuario,
+    retiradaLivro
 }
