@@ -83,16 +83,15 @@ async function retiradaLivro(id) {
     return res.rows[0];
 }
 
-// async function consultaLivroDisponivel(nome, status) {
-//     const cliente = new Client(conexao)
-//     await cliente.connect();
-//     const res = await cliente.query('SELECT FROM livro nome=$1 WHERE status=$2 RETURNING *', [
-//         nome,
-//         status
-//     ])
-//     await cliente.end();
-//     return res.rows[0];
-// }
+async function consultaLivroDisponivel(status) {
+    const cliente = new Client(conexao)
+    await cliente.connect();
+    const res = await cliente.query('SELECT * FROM livro WHERE  status=$1', [
+        status
+    ])
+    await cliente.end();
+    return res.rows;
+}
 
 
 
@@ -106,5 +105,5 @@ module.exports = {
     deletarLivro,
     devolucaoLivro,
     retiradaLivro,
-    // consultaLivroDisponivel
+    consultaLivroDisponivel
 }

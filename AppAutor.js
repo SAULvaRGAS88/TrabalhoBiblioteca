@@ -35,7 +35,7 @@ async function main() {
     //BUSCANDO AUTOR POR ID
     try{
         const autor = await autorNegocio.buscarAutorId(1)
-        console.log('>>> LIVRO PEQUISADO POR ID', autor);
+        console.log('>>> AUTOR PEQUISADO POR ID', autor);
     }catch (err){
         console.log('ERRO', err);
     }
