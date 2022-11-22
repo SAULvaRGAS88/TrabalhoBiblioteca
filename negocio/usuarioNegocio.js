@@ -1,9 +1,9 @@
-const { validarCliente } = require('./validacao')
+const { validarUsuario } = require('./validacao')
 const usuarioPersistence = require('../persistence/usuarioPersistence')
 
 
 async function insereUsuario(usuario) {
-    if (validarCliente(usuario)) {
+    if (validarUsuario(usuario)) {
         const usuarioInserido = await usuarioPersistence.insereUsuario(usuario);
         return usuarioInserido;
     }
@@ -32,7 +32,7 @@ async function buscarUsuarioNome(nome) {
 }
 
 async function atualizarUsuario(matricula, usuario) {
-    if (validarCliente(usuario)) {
+    if (validarUsuario(usuario)) {
         const usuarioAtualizar = await usuarioPersistence.buscarUsuarioMatricula(matricula);
         if (usuarioAtualizar)
             return await usuarioPersistence.atualizarUsuario(matricula, usuario);

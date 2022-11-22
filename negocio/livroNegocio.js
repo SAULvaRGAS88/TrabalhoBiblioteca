@@ -42,7 +42,7 @@ async function atualizarLivro(id, livro) {
             return await livroPersistence.atualizarLivro(id, livro);
     }
     else {
-        throw { id: 400, mensagem: "ALGUM PARAMETRO INVALIDO ...ARRUMA ISSO DEV..." };
+        throw { id: 400, mensagem: "ALGUM PARAMETRO INVALIDO ...VERIFIQUE DADOS E TENTE NOVAMENTE..." };
     }
 }
 
@@ -52,16 +52,19 @@ async function deletarLivro(id) {
         return await livroPersistence.deletarLivro(id);
 }
 
-// async function consultaLivroDisponivel(nome) {
-//     const statusLivro = await livroPersistence.buscarLivroNome(nome);
-//     if (statusLivro){
-//         return await livroPersistence.consultaLivroDisponivel(nome)
-//     }
-//     else{
-//         throw { id: 400, mensagem: "ALGUM PARAMETRO INVALIDO ...ARRUMA ISSO DEV..." };
-//     }
-        
-// }
+async function consultaLivroDisponivel(status) {
+    if (!status){
+        throw { id: 400, mensagem: "ALGUM PARAMETRO INVALIDO ...VERIFIQUE DADOS E TENTE NOVAMENTE..." };
+    }
+    return await livroPersistence.consultaLivroDisponivel(status); 
+}
+
+async function consultaLivroLocado(status) {
+    if(!status){
+        throw { id: 400, mensagem: "ALGUM PARAMETRO INVALIDO ...VERIFIQUE DADOS E TENTE NOVAMENTE..." };
+    }
+    return await livroPersistence.consultaLivroLocado(status);
+}
 
 
 module.exports = {
@@ -72,5 +75,6 @@ module.exports = {
     atualizarLivro,
     deletarLivro,
     consultaLivro,
-    // consultaLivroDisponivel
+    consultaLivroDisponivel,
+    consultaLivroLocado
 }

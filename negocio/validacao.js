@@ -1,9 +1,10 @@
 function validacaoLivro(livro) {
-    return livro && livro.nome && livro.autor && livro.editora && livro.ano &&
+    return livro && livro.nome && livro.autor && livro.editora && livro.ano && livro.status &&
         typeof livro.nome == 'string' &&
         typeof livro.autor == 'string' &&
         typeof livro.editora == 'string' &&
-        typeof livro.ano == 'number'
+        typeof livro.ano == 'number' &&
+        typeof livro.status == 'string'
 }
 
 function validarAutor(autor) {
@@ -11,14 +12,15 @@ function validarAutor(autor) {
         typeof autor.nome == 'string' &&
         typeof autor.pais_origem == 'string'
 }
-function validarCliente(cliente) {
-    return cliente && cliente.nome && cliente.telefone &&
-        typeof cliente.nome == 'string' &&
-        typeof cliente.telefone == 'string'
+function validarUsuario(usuario) {
+    return usuario && usuario.nome && usuario.telefone && usuario.qtd_livros &&
+        typeof usuario.nome == 'string' &&
+        typeof usuario.telefone == 'string' &&
+        typeof usuario.qtd_livros == 'number'
 }
 
 module.exports = {
     validacaoLivro,
     validarAutor, 
-    validarCliente
+    validarUsuario
 }

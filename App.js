@@ -103,13 +103,20 @@ async function main() {
         console.log("Erro", err);
     }
 
-    // //TRAZER LIVROS DISPONIVEIS
-    // try {
-    //     const livroDisponivel = await livroNegocio.consultaLivroDisponivel('O Menino Maluquinho');
-    //     console.log(">>>LIVROS DISPONIVEIS", livroDisponivel);
-    // } catch (err){
-    //     console.log("ERRO", err );
-    // }
+    //TRAZER LIVROS DISPONIVEIS
+    try {
+        const livroDisponivel = await livroNegocio.consultaLivroDisponivel('disponivel');
+        console.log(">>>LIVRO DISPONIVEL", livroDisponivel);
+    } catch (err) {
+        console.log("ERRO", err);
+    }
+    //TRAZER LIVROS LOCADOS
+    try {
+        const livroLocado = await livroNegocio.consultaLivroDisponivel('indisponivel');
+        console.log(">>>LIVROS INDISPONIVEIS ", livroLocado);
+    } catch (err) {
+        console.log("ERRO", err);
+    }
 }
 
 main()
