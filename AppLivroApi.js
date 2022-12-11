@@ -35,7 +35,7 @@ app.put("/livros/:id", async (req, res) => {
 
     try {
         const livroAtualizado = await livroNegocio.atualizarLivro(id, livro);
-        res.json(livroAtualizado);//deletar SEMPRE precisa retornar o code 200
+        res.json(livroAtualizado);//atualizar SEMPRE precisa retornar o code 200
     }
     catch (err) {
         if (err && err.id) {
