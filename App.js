@@ -5,14 +5,19 @@ const port = 3000
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+//  LISTAR LIVROS CADASTRADOS
 app.get('/livros', async (req, res) => {
     let livro = await livroNegocio.listarLivros(req)
     res.json(livro)
 })
+
+// BUSCAR LIVRO POR ID
 app.get('/livros/:id', async (req, res) => {
     let livro = await livroNegocio.buscarLivroId(req.params.id)
     res.send(livro)
 })
+
+// INSERIR LIVRO
 app.post('/livros', async (req, res) => {
     try {
         let livro = await livroNegocio.insereLivro(req.body)
@@ -22,17 +27,45 @@ app.post('/livros', async (req, res) => {
     }
 
 })
-app.put('/livros/:id', async(req, res) => {
-    try{
-       let livro = await livroNegocio.atualizarLivro(req.body) 
-       res.status(200).json("Livro atualizado", livro)//atualizar SEMPRE precisa retornar o code 200 
-    } catch(error){
-        res.status(500).json
+
+// ATUALIZAR LIVRO 
+app.put("/livros/:id", async (req, res) => {
+    const id = req.params.id;
+    let livro = req.body;
+
+    try {
+        const livroAtualizado = await livroNegocio.atualizarLivro(id, livro);
+        res.json(livroAtualizado);//deletar SEMPRE precisa retornar o code 200
     }
-    
+    catch (err) {
+        if (err && err.id) {
+            res.status(err.id).json({ Erro: err.mensagem })
+        }
+        else {
+            console.log(err);
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
+    }
 })
-app.delete('/livros/:id', (req, res) => {
-    res.send(`Deletar livros` + req.params.id)//deletar SEMPRE precisa retornar o code 200
+
+//DELETAR LIVRO
+app.delete('/livros/:id', async(req, res) => {
+    const id = req.params.id;
+    let livro = req.body;
+
+    try {
+        const livroDeletado = await livroNegocio.deletarLivro(id, livro);
+        res.status(200).json(livroDeletado);//deletar SEMPRE precisa retornar o code 200
+    }
+    catch (err) {
+        if (err && err.id) {
+            res.status(err.id).json({ Erro: err.mensagem })
+        }
+        else {
+            console.log(err);
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
+    }//deletar SEMPRE precisa retornar o code 200
 })
 
 app.listen(port, () => {
