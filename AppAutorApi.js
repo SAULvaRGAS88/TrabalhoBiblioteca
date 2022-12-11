@@ -17,6 +17,22 @@ app.get('/autores/:id', async (req, res) => {
     res.send(autor)
 })
 
+// BUSCAR AUTOR POR NOME
+app.get('/autores/nome/:nome', async (req, res) =>{
+    const nome = req.params.nome
+    try{
+        const nomeAutor = await autorNegocio.buscarAutorNome(nome)
+        res.json(nomeAutor)
+    }catch (err){
+        if (err && err.id) {
+            res.status(err.id).json({ Erro: err.mensagem })
+        }
+        else {
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
+    }
+})
+
 // INSERIR AUTOR
 app.post('/autores', async (req, res) => {
     try {
