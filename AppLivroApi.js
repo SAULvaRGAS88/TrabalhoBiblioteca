@@ -13,8 +13,36 @@ app.get('/livros', async (req, res) => {
 
 // BUSCAR LIVRO POR ID
 app.get('/livros/:id', async (req, res) => {
-    let livro = await livroNegocio.buscarLivroId(req.params.id)
-    res.send(livro)
+    const id = req.params.id
+    try {
+        let livro = await livroNegocio.buscarLivroId(id)
+        res.json(livro)
+    }
+    catch (err) {
+        if (err && err.id) {
+            res.status(err.id).json({ Erro: err.mensagem })
+        }
+        else {
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
+    }
+
+})
+
+// BUSCAR LIVRO POR NOME
+app.get('/livros/nome/:nome', async (req, res) =>{
+    const nome = req.params.nome
+    try{
+        const nomeLivro = await livroNegocio.buscarLivroNome(nome)
+        res.json(nomeLivro)
+    }catch (err){
+        if (err && err.id) {
+            res.status(err.id).json({ Erro: err.mensagem })
+        }
+        else {
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
+    }
 })
 
 // INSERIR LIVRO
@@ -49,7 +77,7 @@ app.put("/livros/:id", async (req, res) => {
 })
 
 //DELETAR LIVRO
-app.delete('/livros/:id', async(req, res) => {
+app.delete('/livros/:id', async (req, res) => {
     const id = req.params.id;
     let livro = req.body;
 

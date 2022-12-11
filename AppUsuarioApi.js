@@ -17,6 +17,22 @@ app.get('/usuarios/:id', async (req, res) => {
     res.send(usuario)
 })
 
+// BUSCAR USUARIO POR NOME
+app.get('/usuarios/nome/:nome', async (req, res) =>{
+    const nome = req.params.nome
+    try{
+        const nomeUsusario = await usuarioNegocio.buscarUsuarioNome(nome)
+        res.json(nomeUsusario)
+    }catch (err){
+        if (err && err.id) {
+            res.status(err.id).json({ Erro: err.mensagem })
+        }
+        else {
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
+    }
+})
+
 // INSERIR AUTOR
 app.post('/usuarios', async (req, res) => {
     try {
