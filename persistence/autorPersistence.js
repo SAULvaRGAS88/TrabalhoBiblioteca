@@ -20,6 +20,14 @@ async function listarAutores() {
     return res.rows
 }
 
+const listarAllAutores = async () => {
+    const cliente = new Client(conexao)
+    await cliente.connect()
+    const res = await cliente.query('SELECT LIVRO.AUTOR, AUTOR.NOME FROM livro JOIN autor ON LIVRO.AUTOR = AUTOR.NOME')
+    await cliente.end()
+    return res.rows
+}
+
 async function buscarAutorId(id) {
     const cliente = new Client(conexao)
     await cliente.connect();
@@ -62,6 +70,7 @@ module.exports = {
     buscarAutorId,
     buscarAutorNome,
     atualizarAutor,
-    deletarAutor
+    deletarAutor,
+    listarAllAutores
 }
-    
+

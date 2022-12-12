@@ -8,6 +8,7 @@ async function insereUsuario(usuario) {
         usuario.nome,
         usuario.telefone,
         0
+        // usuario.qtd_livros 
     ])
     await cliente.end()
     return res.rows[0]

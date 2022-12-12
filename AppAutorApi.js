@@ -6,15 +6,34 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 //  LISTAR AUTORES CADASTRADOS
-app.get('/autores', async (req, res) => {
-    let autor = await autorNegocio.listarAutores(req)
-    res.json(autor)
+app.get("/autores", async (req, res) => {
+    try{
+        const autor = await autorNegocio.listarAutores(req);
+        res.json(autor);
+    } catch(err){ 
+        res.status(500).json({Erro:"Erro na Aplicacao"});
+    }
+
+})
+
+// LISTAR ALL ALTORES
+app.get('/autores/nome', async (req, res)=>{
+    try{
+      const autor =await autorNegocio.listarAllAutores(req)
+    res.json(autor)  
+    } catch(err){
+        res.status(500).json({Erro:"Erro na Aplicacao"});
+    }
 })
 
 // BUSCAR AUTOR POR ID
 app.get('/autores/:id', async (req, res) => {
-    let autor = await autorNegocio.buscarAutorId(req.params.id)
-    res.send(autor)
+    try{
+       let autor = await autorNegocio.buscarAutorId(req.params.id)
+    res.send(autor) 
+    } catch (err){
+        res.status(500).json({Erro:"Erro na Aplicacao"});
+    }
 })
 
 // BUSCAR AUTOR POR NOME
