@@ -7,7 +7,7 @@ async function insereLivro(livro) {
         return livroInserido;
     }
     else {
-        throw { id: 400, mensagem: "FALTA PARAMETROS" }
+        throw { id: 400, mensagem: "FALTA PARAMETROS PARA INSERIR LIVRO. FAVOR VERIFICAR E TENTE NOVAMENTE" }
     }
 }
 
@@ -23,16 +23,17 @@ async function listarLivros() {
 async function buscarLivroId(id) {
     const livro = await livroPersistence.buscarLivroId(id);
     if (!livro) {
-        throw { id: 404, mensagem: `Livro ${id} nao encontrado` };
+        throw { id: 404, mensagem: `Livro ID Número ${id}, nao encontrado. Pesquise po ID valido` };
     }
     return livro;
 }
 
 async function buscarLivroNome(nome) {
-    if (!nome) {
-        throw { id: 400, mensagem: "Falta parametro nome" };
+    const nomeLivro = await livroPersistence.buscarLivroNome(nome)
+    if (!nomeLivro) {
+        throw { id: 404, mensagem: `LIVRO ${nome} NÃO ENCONTRADO EM NOSSO BANCO DE DADOS. FAVOR VERIFICAR E TENTE NOVAMENTE.` };
     }
-    return await livroPersistence.buscarLivroNome(nome);
+    return nomeLivro
 }
 
 async function atualizarLivro(id, livro) {
