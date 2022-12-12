@@ -15,6 +15,10 @@ async function listarAutores() {
     return await autorPersistence.listarAutores();
 }
 
+const listarAllAutores = async () =>{
+    return await autorPersistence.listarAllAutores()
+}
+
 async function buscarAutorId(id) {
     const autor = await autorPersistence.buscarAutorId(id);
     if (!autor) {
@@ -55,7 +59,8 @@ module.exports = {
     buscarAutorId,
     buscarAutorNome,
     atualizarAutor,
-    deletarAutor
+    deletarAutor,
+    listarAllAutores
 }
 
 

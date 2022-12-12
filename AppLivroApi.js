@@ -7,8 +7,13 @@ app.use(express.urlencoded({ extended: true }))
 
 //  LISTAR LIVROS CADASTRADOS
 app.get('/livros', async (req, res) => {
-    let livro = await livroNegocio.listarLivros(req)
-    res.json(livro)
+    try{
+       let livro = await livroNegocio.listarLivros(req)
+    res.json(livro) 
+    } catch (err){
+        res.status(500).json({ Erro: "Erro na Aplicacao" });
+    }
+    
 })
 
 // BUSCAR LIVRO POR ID
