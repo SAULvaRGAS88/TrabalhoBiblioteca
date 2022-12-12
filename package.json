@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "global": "^4.4.0",
+    "pg": "^8.8.0"
+  },
+  "name": "trabalhobiblioteca",
+  "version": "1.0.0",
+  "main": "AppUsuario.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node AppUsuario.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SAULvaRGAS88/TrabalhoBiblioteca.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SAULvaRGAS88/TrabalhoBiblioteca/issues"
+  },
+  "homepage": "https://github.com/SAULvaRGAS88/TrabalhoBiblioteca#readme",
+  "keywords": [],
+  "description": ""
+}
