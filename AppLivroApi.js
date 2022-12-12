@@ -55,8 +55,13 @@ app.post('/livros', async (req, res) => {
     try {
         let livro = await livroNegocio.insereLivro(req.body)
         res.status(201).json(livro)//insire SEMPRE precisa retornar o code 201
-    } catch (error) {
-        res.status(500).json
+    } catch (err) {
+        if (err) {
+            res.status(400).json({ Erro: err.mensagem })
+        } else {
+            console.log(err);
+            res.status(500).json({ Erro: "Erro na Aplicacao" });
+        }
     }
 
 })
@@ -91,8 +96,8 @@ app.delete('/livros/:id', async (req, res) => {
         res.status(200).json(livroDeletado);//deletar SEMPRE precisa retornar o code 200
     }
     catch (err) {
-        if (err && err.id) {
-            res.status(err.id).json({ Erro: err.mensagem })
+        if (err) {
+            res.status(404).json({ Erro: err.mensagem })
         }
         else {
             console.log(err);
