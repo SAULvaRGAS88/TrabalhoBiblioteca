@@ -13,7 +13,7 @@ function validarAutor(autor) {
         typeof autor.pais_origem == 'string'
 }
 function validarUsuario(usuario) {
-    return usuario && usuario.nome && usuario.telefone && usuario.qtd_livros  &&
+    return usuario && usuario.nome && usuario.telefone && usuario.qtd_livros > -1  && 
         typeof usuario.nome == 'string' &&
         typeof usuario.telefone == 'string' &&
         typeof usuario.qtd_livros == 'number'

@@ -7,7 +7,7 @@ async function insereAutor(autor) {
         return autorInserido;
     }
     else {
-        throw { id: 400, mensagem: "FALTA PARAMETROS" }
+        throw { id: 400, mensagem: "FALTA PARAMETROS PARA INSERIR AUTOR. FAVOR VERIFICAR E TENTE NOVAMENTE" }
     }
 }
 
@@ -22,16 +22,17 @@ const listarAllAutores = async () =>{
 async function buscarAutorId(id) {
     const autor = await autorPersistence.buscarAutorId(id);
     if (!autor) {
-        throw { id: 404, mensagem: `Autor ${id} nao encontrado` };
+        throw { id: 404, mensagem: `Autor com ID ${id} nao encontrado. Favor tentar novamente` };
     }
     return autor;
 }
 
-async function buscarAutorNome(nome) {
-    if (!nome) {
-        throw { id: 400, mensagem: "Falta parametro nome" };
+const buscarAutorNome =  async (nome) =>{
+    const nomeAutor = await autorPersistence.buscarAutorNome(nome)
+    if (!nomeAutor){
+        throw{ id: 404, mensagem: `AUTOR ${nome} NÃO ENCONTRADO EM NOSSO BANCO DE DADOS. FAVOR VERIFICAR E TENTE NOVAMENTE.`}
     }
-    return await autorPersistence.buscarAutorNome(nome);
+    return nomeAutor
 }
 
 async function atualizarAutor(id, autor) {
