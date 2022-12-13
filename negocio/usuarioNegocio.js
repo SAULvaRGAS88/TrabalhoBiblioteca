@@ -19,7 +19,7 @@ async function listarUsuarios() {
 async function buscarUsuarioMatricula(matricula) {
     const usuario = await usuarioPersistence.buscarUsuarioMatricula(matricula);
     if (!usuario) {
-        throw { matricula: 404, mensagem: `MATRICULA ${matricula} NÃO ENCONTRADA` };
+    throw { matricula: 404, mensagem: `MATRICULA ${matricula} NÃO ENCONTRADA` };
     }
     return usuario;
 }
@@ -27,7 +27,7 @@ async function buscarUsuarioMatricula(matricula) {
 async function buscarUsuarioNome(nome) {
     const nomeUser = await usuarioPersistence.buscarUsuarioNome(nome)
     if (!nomeUser) {
-        throw { id: 404, mensagem: `USUARIO ${nome} NÃO ENCONTRADO` };
+    throw { id: 404, mensagem: `USUARIO ${nome} NÃO ENCONTRADO` };
     }
     return nomeUser;
 }

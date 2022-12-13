@@ -7,8 +7,7 @@ async function insereUsuario(usuario) {
     const res = await cliente.query('INSERT INTO usuario (nome, telefone, qtd_livros) VALUES ($1,$2,$3) RETURNING *', [
         usuario.nome,
         usuario.telefone,
-        0
-        // usuario.qtd_livros 
+        usuario.qtd_livros 
     ])
     await cliente.end()
     return res.rows[0]
