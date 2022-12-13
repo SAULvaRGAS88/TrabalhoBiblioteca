@@ -51,6 +51,9 @@ async function deletarLivro(id) {
     const livroDeletar = await buscarLivroId(id);
     if (livroDeletar)
         return await livroPersistence.deletarLivro(id);
+    else {
+        throw { id: 404, mensagem: `Livro ID Número ${id}, nao encontrado. Pesquise po ID valido` };
+    }    
 }
 
 async function consultaLivroDisponivel(status) {
